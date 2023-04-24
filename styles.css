@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --fondo: #252525;
+    --amarillo: #ffa400;
+    --rojo: #fc2933;
+    --blanco: #ffffff;
+    --gris: #4d4d4d;
+    --gradiente: #ffa100 #fb103d;
+}
+
+body{
+    background-color: var(--fondo);
+    color: var(--blanco);
+}
+
+a{
+    text-decoration: none;
+    color: var(--blanco);
+}
+
