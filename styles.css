@@ -138,6 +138,7 @@ a{
     padding-left: 168px;
     text-align: left;
     font-size: 1rem;
+    font-weight: 900;
 }
 
 .recomendados_card{
@@ -307,7 +308,7 @@ a{
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    gap: 5px;
+    gap: 1.2px;
 }
 
 .card_cat_text p{
@@ -325,6 +326,14 @@ a{
     color:#1e1e1e;
 }
 
+.card_cat_text .gradiente1{ 
+    background-image: linear-gradient(to right, var(--gradienteA), var(--gradienteB));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
 /***************footer******************/
 
 footer{
@@ -340,6 +349,81 @@ footer{
     padding: 15px 15px;
 }
 
+
+/***************mediaQuery******************/
+
+@media only screen and (max-width: 700px){
+    .header_section{
+        height: 20px;
+        padding: 0px 20px;
+    }
+
+    .hero_section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero_text{
+        width: 100%;
+        margin: 0;
+        padding: 20px 20px;
+    }
+
+    .hero_img{
+        display: none;
+    }
+
+    .recomendados_section{
+        width: 100%;
+    }
+
+    .recomendados_text{
+        padding: 0;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .categorias_section{
+        width: 100%;
+    }
+
+    .categorias_card{
+        margin: 10px;
+        padding: 10px 20%;
+        display: grid;
+        grid-template-columns: repeat(2,1Fr);
+        row-gap: 20px;
+    }
+
+    .categorias_section h6{
+        padding: 0;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .maspopulares_section{
+        width: 100%;
+        height: auto;
+    }
+
+    .maspopulares_section h6{
+        padding: 0;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .cat_selected{
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .legales_section a{
+        display: flex;
+        justify-content: center;
+    }
+}
 
 
 
