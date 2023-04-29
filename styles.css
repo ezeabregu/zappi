@@ -146,6 +146,7 @@ a{
     margin: auto;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
 }
 
@@ -207,7 +208,7 @@ a{
 }
 
 .categorias_section h6{
-    margin-top: 5   0px;
+    margin-top: 50px;
     padding-left: 168px;
 }
 
@@ -216,7 +217,7 @@ a{
     padding-left: 168px;
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 27.5px;
     align-items: center;
 }
 
@@ -228,15 +229,23 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    justify-content: center;
+    gap: 10px;
+    transition: all 300ms;
+}
+
+.active{
+    transform: scale(1.1);              
+    border: 1px solid var(--blanco);
 }
 
 .card_categoria img{
-    width: 80px;
+    width: 60px;
+    height: 60px;
 }
 
 .card_categoria h3{
-    font-size: 0.8rem;
+    font-size: 0.6rem;
 }
 
 .card_categoria .linea{
@@ -244,6 +253,76 @@ a{
     width: 20px;
     height: 5px;
     background: linear-gradient(to right, var(--gradienteA), var(--gradienteB));
+}
+
+/********masPopulares*******/
+
+.maspopulares_section{
+    max-width: 1200px;
+    margin: auto;
+}
+
+.maspopulares_section h6{
+    margin-top: 50px;
+    padding-left: 168px;
+}
+
+.cat_selected{
+    margin-top: 25px;
+    padding-left: 168px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 21px;
+    column-gap: 21px;
+}
+
+.card_cat{
+    width: 200px;
+    height: 180px;
+    border-radius: 10px;
+    background-color: var(--gris);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all 300ms;
+}
+
+.cat_selected:hover > .card_cat:not(:hover)
+{
+    transform: scale(0.9);
+    filter: blur(2px) saturate(0) contrast(1.2) brightness(0.5);
+}
+
+.card_cat img{
+    width: 80%;
+    height: 80px;
+    border-radius: 5px;
+}
+
+.card_cat_text{
+    width: 80%;
+    height: 50px;
+    margin: 5px 0px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card_cat_text p{
+    width: 100%;
+    height: 100%;
+    font-weight: 900;
+    font-size: 0.6rem;
+}
+
+.card_cat_text .title{
+    letter-spacing: 2px;
+}
+
+.card_cat_text .subtitle{
+    color:#1e1e1e;
 }
 
 /***************footer******************/
@@ -257,6 +336,9 @@ footer{
     gap: 10px;
 }
 
+.legales_section a{
+    padding: 15px 15px;
+}
 
 
 
