@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="shortcut icon" href="./images/hero.png" type="image/x-icon">
     <title>Zappi!</title>
+    <script src="https://kit.fontawesome.com/f8973ca62d.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header_section">
-        <nav class="nav_section">
             <div class="nav_img">
                 <img src="./images/hero.png" alt="">
             </div>
             <div class="nav_list">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Carrito</a></li>
-                    <li><a href="">Usuario</a></li>
-                </ul>
+               <nav class="nav_section">
+                 <ul>
+                    <li><a href=""><i class="fa-solid fa-house"></i>Home</a></li>
+                    <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href=""><i class="fa-solid fa-user"></i></a></li>
+                 </ul>
+               </nav>
             </div>
-        </nav>
     </header>
 
     <div class="hero_section">
@@ -29,7 +30,7 @@
             <h1>Si tenés Zappi,</h1>
             <h2>tenés Nucba.</h2>
             <h6>Buscá lo que quieras y nucba te quedés sin comida.</h6>
-            <button>Ver más</button>
+            <button class="btn-text">VER MÁS</button>
         </div>
         <div class="hero_img">
             <img src="./images/hero.png" alt="">
@@ -37,17 +38,79 @@
     </div>
 
     <div class="recomendados_section">
-        <div>
+        <div class="recomendados_text">
             <h6>Hoy te recomendamos</h6>
         </div>
-        <div>
-            card...
+        <div class="recomendados_card">
+            <div class="card_recomendados">
+                <img src="./images/bene.png" alt="">
+                <div class="card_text">
+                    <h5>Bennazianna</h5>
+                    <h6>La más completa</h6>
+                    <h4 class="gradiente">$3600</h4>
+                </div>    
+                <button class="btn-text_recomendados">Agregar</button>  
+            </div>
+            <div class="card_recomendados">
+                <img src="./images/tronco.png" alt="">
+                <div class="card_text">
+                    <h5>Tronco-Pizza</h5>
+                    <h6>Para todo el día</h6>
+                    <h4 class="gradiente">$870</h4>
+                </div>    
+                <button class="btn-text_recomendados">Agregar</button>  
+            </div>
+            <div class="card_recomendados">
+                <img src="./images/papa.png" alt="">
+                <div class="card_text">
+                    <h5>Papas | Provenzal</h5>
+                    <h6>Van como piña</h6>
+                    <h4 class="gradiente">$360</h4>
+                </div>    
+                <button class="btn-text_recomendados">Agregar</button>  
+            </div>
         </div>
     </div>
 
     <div class="categorias_section">
         <h6>Categorias</h6>
-        card categoria ...
+        <div class="categorias_card">
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+            <div class="card_categoria">
+                <img src="/images/cat_pizzapopu.png" alt="">
+                <h3>Populares</h3>
+                <div class="linea"></div>
+            </div>
+        </div>
     </div>
 
     <div class="maspopulares_section">
@@ -55,13 +118,12 @@
         cards populares ....
     </div>
 
-    <div class="legales_section">
-        <a href="">Términos de Uso</a>
-        <a href="">Trabajá con nosotros</a>
-        <a href="">Soporte</a>
-    </div>
-
     <footer>
+        <div class="legales_section">
+            <a href="">Términos de Uso</a>
+            <a href="">Trabajá con nosotros</a>
+            <a href="">Soporte</a>
+        </div>
         <h6>Hecho con &#128153; en <Strong>NUCBAZAPPI</Strong></h6>
     </footer>
 </body>
