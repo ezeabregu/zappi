@@ -21,6 +21,7 @@ body{
     background-color: var(--fondo);
     color: var(--blanco);
     font-family: var(--font-family);
+    overflow-x: hidden;
 }
 
 a{
@@ -71,6 +72,84 @@ a{
 .nav_section i{
     color: var(--amarillo);
 }
+
+/********carrito*******/
+
+.cart_section{
+    /* display: none; */
+    z-index: 100;
+    position: absolute;
+    top: 40px;
+    right: -30%;
+    width: 300px;
+    height: 500px;
+    padding: 20px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--gris);
+    background-color: var(--fondo);
+    transition: all 400ms linear;
+}
+
+.active_cart{
+    transform: translateX(-410px);
+}
+
+.card_product{
+    margin: 10px 0px;
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--gris);
+    -webkit-box-shadow: 1px 0px 68px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 0px 68px -10px rgba(0,0,0,0.75);
+    box-shadow: 1px 0px 68px -10px rgba(0,0,0,0.75);
+}
+
+.more, .less{
+    width: 20px!important;
+    padding: 2px 2px!important;
+}
+
+.card_product img{
+    width: 30px;
+    height: 30px;
+}
+
+.space_subtotal, .space_envio{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+}
+
+.space_total{
+    display: flex;
+    justify-content: space-between;
+}
+
+.space_botones{
+    display: flex;
+    justify-content: space-around;
+}
+
+.overlay {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 1; /*Para que quede por encima del resto de las cosas*/
+  
+    /*Efecto de Glassmorphismo*/
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: none;
+  }
 
 /********heroe*******/
 
@@ -356,6 +435,20 @@ footer{
     .header_section{
         height: 20px;
         padding: 0px 20px;
+    }
+
+    .cart_section{
+        /* display: none; */
+        z-index: 100;
+        position: absolute;
+        top: 40px;
+        right: 0%;
+        width: 100%;
+        height: 100vh;
+    }
+    
+    .active_cart{
+        transform: translateX(400px);
     }
 
     .hero_section{

@@ -50,3 +50,68 @@ para poder hacer consultas o participar del canal privado).*
 
 #HappyCoding 🚀.
 */
+
+const cart = document.querySelector('.cart_section');
+const cartButton = document.querySelector('#carrito');
+const categoriasList = document.querySelector('.categorias_card');
+// catSelected devuelve un html collection
+const catSelected = document.querySelectorAll('.card_categoria');
+
+mostrarCarrito = (e) => {
+    e.preventDefault();
+    cart.classList.toggle("active_cart");
+}
+
+mostrarCategoria = (categoria) => {
+    const { nombre, imagen } = categoria;
+    return ` <div class="card_categoria" data-food="${nombre.toLowerCase()}">
+               <img src="${imagen}" alt="">
+               <h3>${nombre}</h3>
+               <div class="linea"></div>
+             </div>`;
+}
+
+mostrarCategorias = () => {
+    categoriasList.innerHTML = categorias.map(mostrarCategoria).join("");
+}
+
+const changeBtnActiveState = (selectedCategory) => {
+    console.log(selectedCategory);
+    console.log(catSelected);
+    const categories = [...catSelected];
+    console.log(categories.length);
+    categories.forEach((catSelectedBtn) => {
+        console.log(catSelectedBtn.dataset.food);
+      if (catSelectedBtn.dataset.food !== selectedCategory) {
+        catSelectedBtn.classList.remove("active");
+        return;
+      }
+      catSelectedBtn.classList.add("active");
+    });
+};
+  
+const mostrarResultadoCategoria = (e) => {
+    const selectedCategory = e.target.dataset.food;
+    changeBtnActiveState(selectedCategory);
+    // changeShowMoreBtnState(selectedCategory);
+};
+
+const applyFilter = (e) => {
+    if (!e.target.classList.contains("card_categoria")) return;
+    mostrarResultadoCategoria(e);
+    // if (!e.target.dataset.food) {
+    //   products.innerHTML = "";
+    // //   renderProducts();
+    // } else {
+    //   renderProducts(0, e.target.dataset.food);
+    // //   productsController.nextProductsIndex = 1;
+    // }
+};
+
+const init = () => {
+    cartButton.addEventListener('click', mostrarCarrito);
+    window.addEventListener('DOMContentLoaded',mostrarCategorias);
+    categoriasList.addEventListener('click', applyFilter);
+}
+
+init();

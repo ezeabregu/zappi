@@ -18,12 +18,85 @@
                <nav class="nav_section">
                  <ul>
                     <li><a href=""><i class="fa-solid fa-house"></i>Home</a></li>
-                    <li><a href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+                    <li><a href="" id="carrito"><i class="fa-solid fa-cart-shopping"></i></a></li>
                     <li><a href=""><i class="fa-solid fa-user"></i></a></li>
                  </ul>
                </nav>
             </div>
     </header>
+
+    <!--Carrito de compras-->
+    <div class="cart_section">
+        <p>Tus Productos</p>
+        <div class="cart_product_list" id="lista">
+            <div class="card_product">
+                <img src="./images/bene.png" alt="">
+                <div class="card_text">
+                    <h5>Bennazianna</h5>
+                    <h6>La más completa</h6>
+                    <h4 class="gradiente">$3600</h4>
+                </div>    
+                <button class="btn-text_recomendados less">
+                    -
+                </button>
+                <label id="cantidad">2</label>
+                <button class="btn-text_recomendados more">
+                    +
+                </button>
+            </div>
+            <div class="card_product">
+                <img src="./images/bene.png" alt="">
+                <div class="card_text">
+                    <h5>Bennazianna</h5>
+                    <h6>La más completa</h6>
+                    <h4 class="gradiente">$3600</h4>
+                </div>    
+                <button class="btn-text_recomendados less">
+                    -
+                </button>
+                <label id="cantidad">2</label>
+                <button class="btn-text_recomendados more">
+                    +
+                </button>
+            </div>
+            <div class="card_product">
+                <img src="./images/bene.png" alt="">
+                <div class="card_text">
+                    <h5>Bennazianna</h5>
+                    <h6>La más completa</h6>
+                    <h4 class="gradiente">$3600</h4>
+                </div>    
+                <button class="btn-text_recomendados less">
+                    -
+                </button>
+                <label id="cantidad">2</label>
+                <button class="btn-text_recomendados more">
+                    +
+                </button>
+            </div>
+        </div>
+
+        <div class="space_subtotal">
+            <p class="subtotal">Subtotal:</p>
+            <label for="" id="subtotal">0</label>
+        </div>
+        <div class="space_envio">
+            <p class="envio">Envio:</p>
+            <label for="" id="envio">Gratis</label>
+        </div>
+
+        <hr class="myHr">
+
+        <div class="space_total">
+            <p class="total">Total: </p>
+            <label for="" id="total">0</label>
+        </div>
+        <div class="space_botones">
+            <button class="btn-text_recomendados" id="comprar">Comprar</button>
+            <button class="btn-text_recomendados" id="vaciar">Vaciar</button>
+        </div>
+    </div>
+    <!--Fin Carrito de compras-->
 
     <div class="hero_section">
         <div class="hero_text">
@@ -75,41 +148,11 @@
     <div class="categorias_section">
         <h6>Categorias</h6>
         <div class="categorias_card">
-            <div class="card_categoria active">
+            <!-- <div class="card_categoria" data-food="populares">
                 <img src="/images/cat_pizzapopu.png" alt="">
                 <h3>Populares</h3>
                 <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_pizza.png" alt="">
-                <h3>Pizzas</h3>
-                <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_burger.png" alt="">
-                <h3>Hamburguesas</h3>
-                <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_fries.png" alt="">
-                <h3>Napapuki</h3>
-                <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_wrap.png" alt="">
-                <h3>Wraps</h3>
-                <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_mex.png" alt="">
-                <h3>Mexican Food</h3>
-                <div class="linea"></div>
-            </div>
-            <div class="card_categoria">
-                <img src="/images/cat_milkshake.png" alt="">
-                <h3>Batidos</h3>
-                <div class="linea"></div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -190,5 +233,9 @@
         </div>
         <h6>Hecho con &#128153; en <Strong>NUCBAZAPPI</Strong></h6>
     </footer>
+
+    <!--Scripts-->
+    <script src="./info.js"></script>
+    <script src="./app.js"></script>
 </body>
 </html>
