@@ -107,7 +107,6 @@ mostrarCategorias = (categoria) => {
     {
       lugarDeCategoria.innerHTML = categoriaWrap.map(mostrarCategoria).join("");
     }
-    else lugarDeCategoria.innerHTML="";
 }
 
 const botonCategoriaActivo = (selectedCategory) => {

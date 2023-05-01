@@ -327,6 +327,6 @@ const categoriaWrap =
    nombre: 'De carnitas',
    subtitulo: 'Carne picada contaminada',
    precio: 320,
-   imagen: './images/cat_wrap/03.jpg',
+   imagen: './images/cat_wrap/04.jpg',
  }
 ];

@@ -441,9 +441,6 @@ footer{
     }
 
     .cart_section{
-        /* display: none; */
-        z-index: 100;
-        position: absolute;
         top: 40px;
         right: 0%;
         width: 100%;
