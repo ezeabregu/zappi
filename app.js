@@ -56,6 +56,8 @@ const cartButton = document.querySelector('#carrito');
 const categoriasList = document.querySelector('.categorias_card');
 // catSelected devuelve un html collection
 const catSelected = document.querySelectorAll('.card_categoria');
+const lugarDeCategoria = document.querySelector('.cat_selected');
+const textoCategoria = document.getElementById('texto_cat');
 
 mostrarCarrito = (e) => {
     e.preventDefault();
@@ -63,25 +65,54 @@ mostrarCarrito = (e) => {
 }
 
 mostrarCategoria = (categoria) => {
-    const { nombre, imagen } = categoria;
-    return ` <div class="card_categoria" data-food="${nombre.toLowerCase()}">
-               <img src="${imagen}" alt="">
-               <h3>${nombre}</h3>
-               <div class="linea"></div>
+    const { nombre, subtitulo, precio, imagen } = categoria;
+    return ` <div class="card_cat">
+                <img src="${imagen}" alt="${nombre}">
+                <div class="card_cat_text">
+                  <p class="title">${nombre}</p>
+                  <p class="subtitle">${subtitulo}</p>
+                  <p class="gradiente1">$${precio}</p>
+                </div>    
+                <button class="btn-text_recomendados">Agregar</button>
              </div>`;
+};
+
+mostrarCategorias = (categoria) => {
+    textoCategoria.innerHTML=categoria;
+    if(categoria === 'populares')
+    {
+      lugarDeCategoria.innerHTML = categoriaPopulares.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'pizza')
+    {
+      lugarDeCategoria.innerHTML = categoriaPizza.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'burger')
+    {
+      lugarDeCategoria.innerHTML = categoriaBurger.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'milkshake')
+    {
+      lugarDeCategoria.innerHTML = categoriaMilshake.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'mex')
+    {
+      lugarDeCategoria.innerHTML = categoriaMex.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'fries')
+    {
+      lugarDeCategoria.innerHTML = categoriaFries.map(mostrarCategoria).join("");
+    }
+    else if(categoria === 'wrap')
+    {
+      lugarDeCategoria.innerHTML = categoriaWrap.map(mostrarCategoria).join("");
+    }
+    else lugarDeCategoria.innerHTML="";
 }
 
-mostrarCategorias = () => {
-    categoriasList.innerHTML = categorias.map(mostrarCategoria).join("");
-}
-
-const changeBtnActiveState = (selectedCategory) => {
-    console.log(selectedCategory);
-    console.log(catSelected);
+const botonCategoriaActivo = (selectedCategory) => {
     const categories = [...catSelected];
-    console.log(categories.length);
     categories.forEach((catSelectedBtn) => {
-        console.log(catSelectedBtn.dataset.food);
       if (catSelectedBtn.dataset.food !== selectedCategory) {
         catSelectedBtn.classList.remove("active");
         return;
@@ -92,26 +123,27 @@ const changeBtnActiveState = (selectedCategory) => {
   
 const mostrarResultadoCategoria = (e) => {
     const selectedCategory = e.target.dataset.food;
-    changeBtnActiveState(selectedCategory);
+    botonCategoriaActivo(selectedCategory);
     // changeShowMoreBtnState(selectedCategory);
 };
 
-const applyFilter = (e) => {
+const filtroCategoria = (e) => {
     if (!e.target.classList.contains("card_categoria")) return;
     mostrarResultadoCategoria(e);
-    // if (!e.target.dataset.food) {
-    //   products.innerHTML = "";
-    // //   renderProducts();
-    // } else {
-    //   renderProducts(0, e.target.dataset.food);
-    // //   productsController.nextProductsIndex = 1;
-    // }
+    console.log(e.target.dataset.food);
+    if (!e.target.dataset.food) {
+       lugarDeCategoria.innerHTML = "";
+       //mostrarCategorias();
+    } 
+    else {
+       mostrarCategorias(e.target.dataset.food);
+    }
 };
 
 const init = () => {
     cartButton.addEventListener('click', mostrarCarrito);
-    window.addEventListener('DOMContentLoaded',mostrarCategorias);
-    categoriasList.addEventListener('click', applyFilter);
+    //window.addEventListener('DOMContentLoaded',mostrarCategorias);
+    categoriasList.addEventListener('click', filtroCategoria);
 }
 
 init();
