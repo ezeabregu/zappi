@@ -51,21 +51,38 @@ para poder hacer consultas o participar del canal privado).*
 #HappyCoding 🚀.
 */
 
-const cart = document.querySelector('.cart_section');
+const cartSection = document.querySelector('.cart_section');
 const cartButton = document.querySelector('#carrito');
 const categoriasList = document.querySelector('.categorias_card');
 // catSelected devuelve un html collection
 const catSelected = document.querySelectorAll('.card_categoria');
 const lugarDeCategoria = document.querySelector('.cat_selected');
 const textoCategoria = document.getElementById('texto_cat');
+const listaCarrito = document.getElementById('lista');
+const vaciarCarrito = document.getElementById('vaciar');
+const comprarCarrito = document.getElementById('comprar');
+const subtotalCompra = document.getElementById('subtotal');
+const envioCompra = document.getElementById('envio');
+const totalCompra = document.getElementById('total');
+const menos = document.querySelector('less');
+const mas = document.querySelector('more');
 
-mostrarCarrito = (e) => {
-    e.preventDefault();
-    cart.classList.toggle("active_cart");
+let carrito = JSON.parse(localStorage.getItem("cart")) || [];
+
+const saveLocalStorage = (cartList) => {
+  localStorage.setItem("cart", JSON.stringify(cartList));
 }
 
-mostrarCategoria = (categoria) => {
-    const { nombre, subtitulo, precio, imagen } = categoria;
+const mostrarCarrito = (e) => {
+    e.preventDefault();
+    cartSection.classList.toggle("active_cart");
+    subtotalCarrito();
+    mostrarTotal();
+    mostrarCarritoLista();
+}
+
+const mostrarCategoria = (categoria) => {
+    const { id, nombre, subtitulo, precio, imagen } = categoria;
     return ` <div class="card_cat">
                 <img src="${imagen}" alt="${nombre}">
                 <div class="card_cat_text">
@@ -73,11 +90,11 @@ mostrarCategoria = (categoria) => {
                   <p class="subtitle">${subtitulo}</p>
                   <p class="gradiente1">$${precio}</p>
                 </div>    
-                <button class="btn-text_recomendados">Agregar</button>
+                <button class="btn-text_recomendados btn_agregar" data-id='${id}' data-nombre='${nombre}' data-subtitulo='${subtitulo}' data-precio='${precio}' data-imagen='${imagen}'>Agregar</button>
              </div>`;
 };
 
-mostrarCategorias = (categoria) => {
+const mostrarCategorias = (categoria) => {
     textoCategoria.innerHTML=categoria;
     if(categoria === 'populares')
     {
@@ -127,7 +144,7 @@ const mostrarResultadoCategoria = (e) => {
 };
 
 const filtroCategoria = (e) => {
-    if (!e.target.classList.contains("card_categoria")) return;
+    if (!e.target.classList.contains('card_categoria')) return;
     mostrarResultadoCategoria(e);
     console.log(e.target.dataset.food);
     if (!e.target.dataset.food) {
@@ -139,10 +156,174 @@ const filtroCategoria = (e) => {
     }
 };
 
+const cerrarAlScroll = () => {
+  if (!cartSection.classList.contains('active_cart')) {
+    return;
+  }
+  cartSection.classList.remove('active_cart');
+};
+
+/*******Carrito de compras**********/
+
+const mostrarCarritoElemento = (producto) => {
+  const { imagen, nombre, subtitulo, precio, cantidad} = producto;
+  return ` <div class="card_product">
+              <img src="${imagen}" alt="">
+              <div class="card_text_cart">
+                <h5>${nombre}</h5>
+                <h6>${subtitulo}</h6>
+                <h4 class="gradiente">$${precio}</h4>
+              </div>
+              <div class="card_buttons">    
+                <button class="btn-text_recomendados less" data-nombre='${nombre}'>-</button>
+                <label id="cantidad">${cantidad}</label>
+                <button class="btn-text_recomendados more" data-nombre='${nombre}'>+</button>
+              </div>   
+           </div>`;
+};
+
+const mostrarCarritoLista = () => {
+  if (!carrito.length) {
+    listaCarrito.innerHTML = `<h3 class="mensajeCarrito">Aún no hay productos</h3>`;
+    return;
+  }
+  listaCarrito.innerHTML = carrito.map(mostrarCarritoElemento).join("");
+};
+
+const crearDatosDeProducto = (id,nombre,subtitulo,precio,imagen) => {
+    return {id,nombre,subtitulo,precio,imagen};
+};
+
+const crearProductoEnCarrito = (producto) => {
+  carrito = [...carrito, {...producto, cantidad: 1}];
+};
+
+const existeProductoEnCarrito = (producto) => {
+  return carrito.find((item) => item.nombre === producto.nombre);
+};
+
+const sumarUnidadAlProducto = (producto) => {
+  carrito = carrito.map((carritoProducto) => {
+    return carritoProducto.nombre === producto.nombre ?
+    { ...carritoProducto, cantidad: carritoProducto.cantidad + 1}
+    : carritoProducto;
+  });
+};
+
+const subtotalCarrito = () => {
+  return carrito.reduce((acc,cur) => acc + Number(cur.precio)*cur.cantidad,0);
+};
+
+const envio = () => {
+  if(subtotalCarrito() >= 5000 || !carrito.length) return 0;
+  else{
+    return 1250;
+  }
+}
+
+const mostrarTotal = () => {
+  subtotalCompra.innerHTML = `$${subtotalCarrito().toFixed(2)}`;
+  envioCompra.innerHTML = `$${envio()}`;
+  totalCompra.innerHTML = `$${(subtotalCarrito()+envio()).toFixed(2)}`;
+};
+
+const agregarProduto = (e) => {
+  if (!e.target.classList.contains('btn_agregar')) return;
+  const { id, nombre, subtitulo, precio, imagen } = e.target.dataset;
+  const producto = crearDatosDeProducto(id, nombre, subtitulo, precio, imagen);
+  if(existeProductoEnCarrito(producto)){
+    sumarUnidadAlProducto(producto);
+  }else{
+    crearProductoEnCarrito(producto);
+  }
+  estadoCarrito();
+};
+
+const borrarProductoDelCarrito = (existeProducto) => {
+  carrito = carrito.filter((producto) => producto.nombre !== existeProducto.nombre);
+  estadoCarrito();
+};
+
+const restarUnidadProducto = (existeProducto) => {
+  carrito = carrito.map((producto) => {
+      return producto.nombre === existeProducto.nombre ? 
+      {...producto, cantidad: Number(producto.cantidad)-1}
+      : producto;
+  });
+};
+
+const botonDecrementarProducto = (nombre) => {
+  const existeProductoEnCarrito = carrito.find((item) => item.nombre === nombre);
+
+  if (existeProductoEnCarrito.cantidad === 1) {
+    if (window.confirm("Desea eliminar el producto del carrito")) {
+      // borrar producto
+      borrarProductoDelCarrito(existeProductoEnCarrito);
+    }
+    return;
+  }
+  // Restar uno al producto existente
+  restarUnidadProducto(existeProductoEnCarrito);
+};
+
+const botonIncrementarProducto = (nombre) => {
+  const existeProductoEnCarrito = carrito.find((item) => item.nombre === nombre);
+  sumarUnidadAlProducto(existeProductoEnCarrito);
+};
+
+const cantidadEnCarrito = (e) => {
+  if (e.target.classList.contains("less")) {
+    botonDecrementarProducto(e.target.dataset.nombre);
+  } else if (e.target.classList.contains("more")) {
+    botonIncrementarProducto(e.target.dataset.nombre);
+  }
+  estadoCarrito();
+};
+
+const vaciarCarritoDeCompras = () => {
+  var opcion = window.confirm("¿Está seguro que desea vaciar el carrito?");
+  if (opcion === true) {
+    carrito = [];
+    estadoCarrito();
+    alert('Carrito vaciado.');
+  } else {
+    alert('Cancelado exitosamente.');
+  }
+  estadoCarrito();
+};
+
+const finalizarCompra = () => {
+  if(!carrito.length) return;
+  var respuesta = window.confirm('¿Desea finaliza la compra y abonar?');
+  if (respuesta === true) {
+    alert('Gracias por su compra!');
+    carrito = [];
+    estadoCarrito();
+  } else {
+    alert('Continue comprando...')
+  }
+  estadoCarrito();
+}
+
+const estadoCarrito = () => {
+  saveLocalStorage(carrito);
+  mostrarCarritoLista(carrito);
+  mostrarTotal(carrito);
+  //disableBtn(buyBtn);
+  //disableBtn(deleteBtn);
+};
+
+/**********************************/
+
 const init = () => {
     cartButton.addEventListener('click', mostrarCarrito);
-    //window.addEventListener('DOMContentLoaded',mostrarCategorias);
+    document.addEventListener('DOMContentLoaded', mostrarCarritoLista);
     categoriasList.addEventListener('click', filtroCategoria);
-}
+    lugarDeCategoria.addEventListener('click', agregarProduto);
+    vaciarCarrito.addEventListener('click', vaciarCarritoDeCompras);
+    window.addEventListener('scroll', cerrarAlScroll);
+    comprarCarrito.addEventListener('click', finalizarCompra);
+    listaCarrito.addEventListener('click', cantidadEnCarrito);
+};
 
 init();

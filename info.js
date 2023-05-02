@@ -288,14 +288,14 @@ const categoriaFries =
    nombre: 'Batatulis',
    subtitulo: 'Batatas fritas',
    precio: 320,
-   imagen: './images/cat_fries/03.jpg',
+   imagen: './images/cat_fries/04.jpg',
  },
  {
    id: 5,
    nombre: 'Provenzal y Ajo',
    subtitulo: 'Papitas con rico aroma',
    precio: 320,
-   imagen: './images/cat_fries/03.jpg',
+   imagen: './images/cat_fries/05.jpg',
  }
 ];
 
