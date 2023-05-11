@@ -64,8 +64,11 @@ const comprarCarrito = document.getElementById('comprar');
 const subtotalCompra = document.getElementById('subtotal');
 const envioCompra = document.getElementById('envio');
 const totalCompra = document.getElementById('total');
-const menos = document.querySelector('less');
-const mas = document.querySelector('more');
+const menos = document.querySelector('.less');
+const mas = document.querySelector('.more');
+const modal = document.querySelector('.modal');
+
+console.log(modal);
 
 let carrito = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -227,16 +230,26 @@ const mostrarTotal = () => {
   totalCompra.innerHTML = `$${(subtotalCarrito()+envio()).toFixed(2)}`;
 };
 
+const mostrarModal = (msg) => {
+  modal.classList.add("modal-activo");
+  modal.textContent = msg;
+  setTimeout(() => {
+    modal.classList.remove("modal-activo");
+  }, 1500);
+};
+
 const agregarProduto = (e) => {
   if (!e.target.classList.contains('btn_agregar')) return;
   const { id, nombre, subtitulo, precio, imagen } = e.target.dataset;
   const producto = crearDatosDeProducto(id, nombre, subtitulo, precio, imagen);
   if(existeProductoEnCarrito(producto)){
     sumarUnidadAlProducto(producto);
+    mostrarModal("Se agrego una unidad del producto al carrito!"); 
   }else{
     crearProductoEnCarrito(producto);
+    mostrarModal("El producto se ha agregado al carrito!");
   }
-  estadoCarrito();
+  estadoCarrito(); 
 };
 
 const borrarProductoDelCarrito = (existeProducto) => {
